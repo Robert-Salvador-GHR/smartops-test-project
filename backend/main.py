@@ -1,7 +1,11 @@
 from fastapi import FastAPI
+from app.db.base import Base
+from app.db.session import engine
 
-app = FastAPI(title="SmartOps Test Project")
+app = FastAPI(title="SmartOps Data Platform")
+
+Base.metadata.create_all(bind=engine)
 
 @app.get("/")
-def healthCheck():
-    return {"status":"ok"}
+def health_check():
+    return {"status": "ok"}
